@@ -1,0 +1,10 @@
+# Folders
+Anteiku/
+Debug/
+Release/
+
+# Files
+*.sln
+*.vcxproj
+*.filters
+*.user
