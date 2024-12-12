@@ -3,6 +3,7 @@
 
 #include <cstdint>
 #include <cwchar>
+#include <ios>
 #include <iostream>
 #include <string_view>
 
@@ -17,13 +18,18 @@ class Process
 {
 public:
 	explicit Process(std::wstring_view name) noexcept;
+
+	std::wstring_view getName() const noexcept { return m_name; }
+	DWORD getIdentifier() const noexcept { return m_identifier; }
+	std::uintptr_t getAddress() const noexcept { return m_address; }
 	
 private:
-	std::wstring getName(std::wstring_view name) const noexcept;
+	void setNameAndIdentifier(std::wstring_view name) noexcept;
+	void setAddress(DWORD identifier) noexcept;
 
-	const std::wstring m_name {};
-	const DWORD m_identifier {};
-	const std::uintptr_t m_address {};
+	std::wstring m_name {};
+	DWORD m_identifier {};
+	std::uintptr_t m_address {};
 };
 
 #endif
