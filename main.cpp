@@ -1,7 +1,7 @@
-#include <iostream>
+#include "Process/Process.h"
 
 int main()
 {
-	std::cout << "Hello, world!";
+	Process myProcess { L"NoTePaD.eXe" };
 	return 0;
 }
