@@ -8,6 +8,8 @@ Process::Process(std::wstring_view name) noexcept
 	{
 		setAddress(m_identifier);
 
+		m_open = OpenProcess(PROCESS_ALL_ACCESS, 0, m_identifier);
+
 		std::wcout << "[Process Name      ]: " << m_name << '\n';
 		std::cout << "[Process Identifier]: " << m_identifier << '\n';
 		std::cout << "[Process Address   ]: 0x" << std::hex << std::uppercase
