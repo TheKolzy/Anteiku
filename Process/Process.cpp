@@ -4,7 +4,7 @@ Process::Process(std::wstring_view name) noexcept
 {
 	setNameAndIdentifier(name);
 
-	if (m_name != L"")
+	if (m_found)
 	{
 		setAddress(m_identifier);
 
@@ -41,6 +41,7 @@ void Process::setNameAndIdentifier(std::wstring_view name) noexcept
 		{
 			m_name = processesList.szExeFile;
 			m_identifier = processesList.th32ProcessID;
+			m_found = true;
 			break;
 		}
 	}
