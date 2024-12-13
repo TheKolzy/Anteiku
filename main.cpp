@@ -3,7 +3,10 @@
 
 int main()
 {
-	Process myProcess { L"NoTePaD.eXe" };
-	Memory myMemory { myProcess };
+	Process process { L"Ac_ClIeNt.ExE" };
+	Memory memory { process };
+
+	memory.write(1337, 0x0351268C);
+
 	return 0;
 }

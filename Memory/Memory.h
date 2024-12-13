@@ -23,6 +23,7 @@ public:
 	T read(std::uintptr_t address) const noexcept;
 	template <typename T>
 	void write(T value, std::uintptr_t address) const noexcept;
+
 private:
 	HANDLE m_open {};
 };
@@ -31,14 +32,16 @@ template <typename T>
 T Memory::read(std::uintptr_t address) const noexcept
 {
 	T value {};
-	ReadProcessMemory(m_open, address, &value, sizeof(value), nullptr);
+	ReadProcessMemory(m_open, reinterpret_cast<LPCVOID>(address)
+		, &value, sizeof(value), nullptr);
 	return value;
 }
 
 template <typename T>
 void Memory::write(T value, std::uintptr_t address) const noexcept
 {
-	WriteProcessMemory(m_open, address, &value, sizeof(value), nullptr);
+	WriteProcessMemory(m_open, reinterpret_cast<LPVOID>(address)
+		, &value, sizeof(value), nullptr);
 }
 
 #endif
