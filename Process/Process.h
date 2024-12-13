@@ -23,7 +23,6 @@ public:
 	DWORD getIdentifier() const noexcept { return m_identifier; }
 	std::uintptr_t getAddress() const noexcept { return m_address; }
 	bool isFound() const noexcept { return m_found; }
-	HANDLE getOpen() const noexcept { return m_open; }
 	
 private:
 	void setNameAndIdentifier(std::wstring_view name) noexcept;
@@ -33,7 +32,6 @@ private:
 	DWORD m_identifier {};
 	std::uintptr_t m_address {};
 	bool m_found {};
-	HANDLE m_open {};
 };
 
 #endif
