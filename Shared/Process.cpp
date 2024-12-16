@@ -2,7 +2,7 @@
 
 Process::Process(std::wstring_view name) noexcept
 {
-	if (setNameAndIdentifier(name) && getModuleBase(m_processID))
+	if (initializeNameAndProcessID(name) && initializeModuleBase(m_processID))
 	{
 		std::wprintf(L"[Process Name      ]: %ls\n", m_name.data());
 		std::print("[Process Identifier]: {}\n", m_processID);
@@ -15,7 +15,7 @@ Process::Process(std::wstring_view name) noexcept
 		std::print("[Error]: Process could not be found.\n");
 }
 
-bool Process::setNameAndIdentifier(std::wstring_view name) noexcept
+bool Process::initializeNameAndProcessID(std::wstring_view name) noexcept
 {
 	const HANDLE processesSnapshot { CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0) };
 
@@ -47,7 +47,7 @@ bool Process::setNameAndIdentifier(std::wstring_view name) noexcept
 	return false;
 }
 
-bool Process::getModuleBase(std::uint32_t processID) noexcept
+bool Process::initializeModuleBase(std::uint32_t processID) noexcept
 {
 	const HANDLE modulesSnapshot { CreateToolhelp32Snapshot(TH32CS_SNAPMODULE
 		| TH32CS_SNAPMODULE32, processID) };

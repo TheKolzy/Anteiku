@@ -39,8 +39,8 @@ protected:
 	Process& operator=(Process&& other) = delete;
 
 private:
-	bool setNameAndIdentifier(std::wstring_view name) noexcept;
-	bool getModuleBase(std::uint32_t processID) noexcept;
+	bool initializeNameAndProcessID(std::wstring_view name) noexcept;
+	bool initializeModuleBase(std::uint32_t processID) noexcept;
 
 	std::wstring m_name {};
 	std::uint32_t m_processID {};
