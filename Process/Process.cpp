@@ -6,8 +6,8 @@ Process::Process(std::wstring_view name)
 	initializeAddress();
 
 	std::wcout << "[Process Name      ]: " << m_name << '\n';
-	std::println("[Process Identifier]: {}", m_pid);
-	std::println("[Process Address   ]: 0x{:X}\n", m_address);
+	std::println( "[Process Identifier]: {} (0x{:X})", m_pid, m_pid);
+	std::println( "[Process Address   ]: 0x{:08X}\n", m_address);
 }
 
 void Process::initializeNameAndPID(std::wstring_view name)

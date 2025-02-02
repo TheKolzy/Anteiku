@@ -13,9 +13,9 @@ class Process
 public:
 	Process(std::wstring_view name);
 
-	std::wstring_view getName() const { return m_name;    }
-	std::uint64_t getPID()      const { return m_pid;     }
-	std::uintptr_t getAddress() const { return m_address; }
+	std::wstring_view getName()    const { return m_name;    }
+	std::uint64_t     getPID()     const { return m_pid;     }
+	std::uintptr_t    getAddress() const { return m_address; }
 
 private:
 	void initializeNameAndPID(std::wstring_view name);
