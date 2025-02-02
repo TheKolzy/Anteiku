@@ -1,8 +1,8 @@
-#include <print>
+#include "Process/Process.h"
 
 int main()
 {
-	std::println("Hello, world!");
+	const Process process { L"NoTePaD.eXe" };
 
 	return 0;
 }
