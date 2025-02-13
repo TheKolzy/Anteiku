@@ -19,10 +19,14 @@ public:
 	bool getShoot() const;
 	void setShoot(bool value) const;
 
+	std::uint8_t getAmmo() const;
+	void setAmmo(std::uint8_t value) const;
+
 private:
 	std::uintptr_t m_player {};
 
 	std::uintptr_t m_health {};
 	std::uintptr_t m_armor  {};
 	std::uintptr_t m_shoot  {};
+	std::uintptr_t m_ammo   {};
 };

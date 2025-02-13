@@ -8,8 +8,8 @@ int main()
 	const Process process { L"Ac_ClIeNt.ExE" };
 	const Memory  memory  { process.getPID() };
 
-	Player player { Offsets::g_playerEnt + process.getAddress() };
-	std::println("{}", player.getHealth());
+	const Player  player  { Offsets::g_playerEnt + process.getAddress() };
+	std::println("{}", player.getAmmo());
 
 	return 0;
 }

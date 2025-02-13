@@ -25,7 +25,7 @@ void Process::initializeNameAndPID(std::wstring_view name)
 				if (!_wcsicmp(name.data(), list.szExeFile))
 				{
 					m_name = list.szExeFile;
-					m_pid = list.th32ProcessID;
+					m_pid  = list.th32ProcessID;
 					break;
 				}
 			}

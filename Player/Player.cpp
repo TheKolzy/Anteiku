@@ -7,6 +7,8 @@ Player::Player(std::uintptr_t address)
 	m_health = m_player + Offsets::g_health;
 	m_armor  = m_player + Offsets::g_armor;
 	m_shoot  = m_player + Offsets::g_shoot;
+	m_ammo   = Memory::calculateAddress<Offsets::g_ammo.size()>
+		(m_player, Offsets::g_ammo);
 }
 
 std::uint8_t Player::getHealth() const
@@ -37,4 +39,14 @@ bool Player::getShoot() const
 void Player::setShoot(bool value) const
 {
 	Memory::write<bool>(m_shoot, value);
+}
+
+std::uint8_t Player::getAmmo() const
+{
+	return Memory::read<std::uint8_t>(m_ammo);
+}
+
+void Player::setAmmo(std::uint8_t value) const
+{
+	Memory::write<std::uint8_t>(m_ammo, value);
 }
