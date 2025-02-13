@@ -9,7 +9,7 @@ int main()
 	const Memory  memory  { process.getPID() };
 
 	const Player  player  { Offsets::g_playerEnt + process.getAddress() };
-	std::println("{}", player.getAmmo());
+	std::println("{}", player.getName());
 
 	return 0;
 }
