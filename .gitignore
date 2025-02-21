@@ -1,0 +1,10 @@
+# Files
+
+*.filters
+*.sln
+*.user
+*.vcxproj
+
+# Folders
+
+*/
