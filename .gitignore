@@ -8,3 +8,7 @@
 # Folders
 
 */
+
+!Main/
+!Shared/
+!Vendor/
