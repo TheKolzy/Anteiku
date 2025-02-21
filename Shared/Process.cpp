@@ -4,6 +4,8 @@ Process::Process(std::wstring_view processName)
 {
 	if (!initializeProcessNameAndId(processName) || !initializeProcessAddress())
 		throw std::runtime_error("[Exception]: Incorrect Process Initialization");
+
+	m_processHandle = OpenProcess(PROCESS_ALL_ACCESS, 0, m_processId);
 }
 
 bool Process::initializeProcessNameAndId(std::wstring_view processName) noexcept
