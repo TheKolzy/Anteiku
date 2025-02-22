@@ -1,3 +1,4 @@
+#include "../Shared/Offsets.h"
 #include "../Shared/Process.h"
 
 int main()
