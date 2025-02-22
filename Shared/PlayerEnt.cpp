@@ -11,6 +11,8 @@ PlayerEnt::PlayerEnt(std::uintptr_t address) noexcept
 	m_armor        = m_playerEnt + Offsets::g_armor;
 	m_isShooting   = m_playerEnt + Offsets::g_isShooting;
 	m_name         = m_playerEnt + Offsets::g_name;
+	m_team         = m_playerEnt + Offsets::g_team;
+	m_isDead       = m_playerEnt + Offsets::g_isDead;
 	m_reload       = Process::resolveAddress(m_playerEnt, Offsets::g_reload);
 	m_ammo         = Process::resolveAddress(m_playerEnt, Offsets::g_ammo);
 }
@@ -91,6 +93,21 @@ void PlayerEnt::setName(std::string_view value) const noexcept
 	// The name has a maximum of 15 characters
 	std::copy_n(value.begin(), 15, name.data());
 	Process::write(m_name, name);
+}
+
+std::uint8_t PlayerEnt::getTeam() const noexcept
+{
+	return Process::read<std::uint8_t>(m_team);
+}
+
+void PlayerEnt::setTeam(std::uint8_t value) const noexcept
+{
+	Process::write(m_team, value);
+}
+
+std::uint8_t PlayerEnt::getIsDead() const noexcept
+{
+	return Process::read<std::uint8_t>(m_isDead);
 }
 
 std::uint8_t PlayerEnt::getReload() const noexcept

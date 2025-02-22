@@ -23,6 +23,9 @@ public:
 	void setIsShooting(bool value)                     const noexcept;
 	[[nodiscard]]  std::string getName()               const noexcept;
 	void setName  (std::string_view value)             const noexcept;
+	[[nodiscard]]  std::uint8_t getTeam()              const noexcept;
+	void setTeam  (std::uint8_t value)                 const noexcept;
+	[[nodiscard]]  std::uint8_t getIsDead()            const noexcept;
 	[[nodiscard]]  std::uint8_t getReload()            const noexcept;
 	void setReload(std::uint8_t value)                 const noexcept;
 	[[nodiscard]]  std::uint8_t getAmmo()              const noexcept;
@@ -38,6 +41,8 @@ private:
 	std::uintptr_t m_armor        {};
 	std::uintptr_t m_isShooting   {};
 	std::uintptr_t m_name         {};
+	std::uintptr_t m_team         {};
+	std::uintptr_t m_isDead       {};
 	std::uintptr_t m_reload       {};
 	std::uintptr_t m_ammo         {};
 };
