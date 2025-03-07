@@ -30,7 +30,7 @@ protected:
 private:
 	bool initializeNameAndIdentifier(std::wstring_view name) noexcept;
 	bool initializeAddress()                                 noexcept;
-	void printData()                                    const noexcept;
+	void printData()                                   const noexcept;
 
 	std::wstring         m_name       {};
 	std::uint32_t        m_identifier {};
