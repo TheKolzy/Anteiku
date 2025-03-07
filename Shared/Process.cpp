@@ -35,7 +35,8 @@ bool Process::initializeNameAndIdentifier(std::wstring_view name) noexcept
 			CloseHandle(processSnapshots);
 			return true;
 		}
-	} while (Process32Next(processSnapshots, &processLists));
+	}
+	while (Process32Next(processSnapshots, &processLists));
 
 	CloseHandle(processSnapshots);
 	return false;
@@ -67,7 +68,8 @@ bool Process::initializeAddress() noexcept
 			CloseHandle(moduleSnapshots);
 			return true;
 		}
-	} while (Module32Next(moduleSnapshots, &moduleLists));
+	}
+	while (Module32Next(moduleSnapshots, &moduleLists));
 
 	CloseHandle(moduleSnapshots);
 	return false;
