@@ -5,7 +5,7 @@ Process::Process(std::wstring_view name)
 	if (!initializeNameAndIdentifier(name) || !initializeAddress())
 		throw std::runtime_error("[Exception]: Failed to Find the Process");
 
-	showData();
+	printData();
 	s_process = OpenProcess(PROCESS_ALL_ACCESS, 0, m_identifier);
 }
 
@@ -75,7 +75,7 @@ bool Process::initializeAddress() noexcept
 	return false;
 }
 
-void Process::showData() const noexcept
+void Process::printData() const noexcept
 {
 	std::printf ("[Process Name      ]: %ls\n", m_name.c_str());
 	std::println("[Process Identifier]: {} (0x{:08X})", m_identifier, m_identifier);
