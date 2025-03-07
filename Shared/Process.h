@@ -22,8 +22,8 @@ public:
 	[[nodiscard]] std::uintptr_t    getAddress()    const noexcept { return m_address;    }
 
 protected:
-	Process(const Process& process) = delete;
-	Process(Process&& process)      = delete;
+	Process(const Process& process)            = delete;
+	Process(Process&& process)                 = delete;
 	Process& operator=(const Process& process) = delete;
 	Process& operator=(Process&& process)      = delete;
 
