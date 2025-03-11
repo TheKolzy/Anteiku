@@ -77,7 +77,7 @@ bool Process::initializeAddress() noexcept
 
 void Process::printData() const noexcept
 {
-	std::printf ("[Process Name      ]: %ls\n", m_name.c_str());
+	std::printf ("[Process Name      ]: %ls\n"        , m_name.c_str());
 	std::println("[Process Identifier]: {} (0x{:08X})", m_identifier, m_identifier);
-	std::println("[Process Address   ]: 0x{:012X}\n", m_address);
+	std::println("[Process Address   ]: 0x{:012X}\n"  , m_address);
 }

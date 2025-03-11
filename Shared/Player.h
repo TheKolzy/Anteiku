@@ -7,7 +7,8 @@
 class Player
 {
 public:
-	explicit Player(std::uintptr_t processAddress) noexcept;
+	Player() = default;
+	explicit Player(std::uintptr_t address)        noexcept;
 
 	[[nodiscard]]  Vector3<float> getHead()  const noexcept;
 	[[nodiscard]]  Vector3<float> getBody()  const noexcept;

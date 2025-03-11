@@ -1,8 +1,8 @@
 #include "Player.h"
 
-Player::Player(std::uintptr_t processAddress) noexcept
+Player::Player(std::uintptr_t address) noexcept
 {
-	m_Player = Process::read<std::uintptr_t>(processAddress + Offsets::g_Player);
+	m_Player = address;
 
 	m_head   = m_Player + Offsets::g_head;
 	m_body   = m_Player + Offsets::g_body;
