@@ -10,9 +10,12 @@ Hack::Hack(std::wstring_view processName)
 void Hack::start() const noexcept
 {
 	Aimbot aimbot { m_Player, m_Process.getAddress() };
+	ESP esp {};
 
 	while (true)
 	{
+		esp.draw();
+			
 		aimbot.aimAtHead();
 	}
 }

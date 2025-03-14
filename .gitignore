@@ -1,6 +1,7 @@
 # Files
 
 *.filters
+*.ini
 *.sln
 *.user
 *.vcxproj
