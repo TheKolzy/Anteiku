@@ -1,3 +1,4 @@
+#include "Memory.h"
 #include "Process.h"
 
 #include <print>
@@ -6,7 +7,8 @@ int main()
 {
 	try
 	{
-		Process process { L"NoTePaD.eXe" };
+		const Process process { L"Ac_ClIeNt.ExE" };
+		const Memory  memory  { process.getIdentifier() };
 	}
 	catch (const std::exception& exception)
 	{

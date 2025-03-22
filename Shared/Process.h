@@ -17,7 +17,7 @@ class Process
 {
 public:
 	explicit Process(std::wstring_view name);
-	~Process() = default;
+	~Process() noexcept = default;
 
 	[[nodiscard]] std::wstring_view getName()          const noexcept { return m_name;       }
 	[[nodiscard]] std::uint32_t     getIdentifier()    const noexcept { return m_identifier; }
