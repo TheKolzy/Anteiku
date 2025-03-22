@@ -21,6 +21,13 @@ public:
 	template <typename T>
 	static bool write(std::uintptr_t address, T value)  noexcept;
 
+protected:
+	Memory(const Memory& memory)            = delete;
+	Memory& operator=(const Memory& memory) = delete;
+
+	Memory(Memory&& memory)                 = delete;
+	Memory& operator=(Memory&& memory)      = delete;
+
 private:
 	static inline HANDLE s_process {};
 };
