@@ -20,6 +20,9 @@ public:
 	[[nodiscard]] static T read(std::uintptr_t address) noexcept;
 	template <typename T>
 	static bool write(std::uintptr_t address, T value)  noexcept;
+	template <std::size_t N>
+	static std::uintptr_t resolveAddress(std::uintptr_t address
+		, const std::array<std::ptrdiff_t, N>& offsets) noexcept;
 
 protected:
 	Memory(const Memory& memory)            = delete;
@@ -57,6 +60,16 @@ bool Memory::write(std::uintptr_t address, T value) noexcept
 	}	
 
 	return true;
+}
+
+template <std::size_t N>
+static std::uintptr_t Memory::resolveAddress(std::uintptr_t address
+	, const std::array<std::ptrdiff_t, N>& offsets) noexcept
+{
+	for (std::size_t i {}; i < offsets.size() - 1; ++i)	
+		address = Memory::read<std::uintptr_t>(address + offsets[i]);
+
+	return address;
 }
 
 #endif
