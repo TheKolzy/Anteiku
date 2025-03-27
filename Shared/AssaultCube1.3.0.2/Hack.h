@@ -1,6 +1,7 @@
 #ifndef HACK_H
 #define HACK_H
 
+#include "Aimbot.h"
 #include "Memory.h"
 #include "Offsets.h"
 #include "Player.h"
@@ -25,6 +26,7 @@ private:
 
 	const Player        m_player;
 	std::vector<Player> m_playerList {};
+	const Aimbot        m_aimbot;
 };
 
 #endif
