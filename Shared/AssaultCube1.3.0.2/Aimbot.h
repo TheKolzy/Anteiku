@@ -6,19 +6,18 @@
 
 #include <cmath>
 #include <numbers>
-#include <print>
 #include <vector>
 
 class Aimbot
 {
 public:
-	Aimbot(const Player& player, std::vector<Player>& playerList) noexcept;
+	Aimbot(const Player& player, const std::vector<Player>& playerList) noexcept;
 
 	void aimAtHead() const noexcept;
 
 private:
-	const Player&        m_player;
-	std::vector<Player>& m_playerList;
+	const Player&              m_player;
+	const std::vector<Player>& m_playerList;
 };
 
 #endif

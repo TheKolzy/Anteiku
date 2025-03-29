@@ -93,7 +93,7 @@ void Player::setShooting(bool value) const noexcept
 void Player::setName(std::string_view value) const noexcept
 {
 	std::array<char, 16> name {};
-	std::size_t size { std::min(value.size(), name.size() - 1) };
+	const std::size_t size { std::min(value.size(), name.size() - 1) };
 	std::copy_n(value.begin(), size, name.begin());
 	name[size] = '\0';
 	

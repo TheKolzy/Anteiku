@@ -1,6 +1,6 @@
 #include "Aimbot.h"
 
-Aimbot::Aimbot(const Player& player, std::vector<Player>& playerList) noexcept
+Aimbot::Aimbot(const Player& player, const std::vector<Player>& playerList) noexcept
 	: m_player { player }, m_playerList { playerList }
 {
 }

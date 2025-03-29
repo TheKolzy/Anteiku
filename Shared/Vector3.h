@@ -11,10 +11,10 @@ public:
 	constexpr Vector3() noexcept = default;
 	constexpr Vector3(T x, T y, T z) noexcept : m_x { x }, m_y { y }, m_z { z } {};
 
-	constexpr Vector3 operator+(const Vector3& vector) const noexcept;
-	constexpr Vector3 operator-(const Vector3& vector) const noexcept;
-	constexpr Vector3 operator*(const Vector3& vector) const noexcept;
-	constexpr Vector3 operator/(const Vector3& vector) const noexcept;
+	[[nodiscard]] constexpr Vector3 operator+(const Vector3& vector) const noexcept;
+	[[nodiscard]] constexpr Vector3 operator-(const Vector3& vector) const noexcept;
+	[[nodiscard]] constexpr Vector3 operator*(const Vector3& vector) const noexcept;
+	[[nodiscard]] constexpr Vector3 operator/(const Vector3& vector) const noexcept;
 
 	[[nodiscard]] constexpr T getX() const noexcept { return m_x; }
 	[[nodiscard]] constexpr T getY() const noexcept { return m_y; }

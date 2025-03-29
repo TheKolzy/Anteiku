@@ -16,7 +16,8 @@ class Hack
 {
 public:
 	explicit Hack(std::wstring_view processName);
-	void run() noexcept;
+
+	void run() const noexcept;
 
 private:
 	void initializePlayerList() noexcept;
