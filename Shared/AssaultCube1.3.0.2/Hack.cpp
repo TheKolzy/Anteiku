@@ -4,7 +4,7 @@ Hack::Hack(std::wstring_view processName)
 try
 	: m_process { processName }, m_memory { m_process.getIdentifier() }
 	, m_player { m_process.getAddress() + static_cast<std::uintptr_t>(Offsets::g_player) }
-	, m_aimbot { m_player, m_playerList }
+	, m_aimbot { m_player, m_playerList }, m_esp {}
 {
 	initializePlayerList();
 }
@@ -13,18 +13,17 @@ catch (const std::exception& exception) {
     std::exit(EXIT_FAILURE);
 }
 
-void Hack::run() const noexcept
+void Hack::run() noexcept
 {
 	while (true)
 	{
-		m_aimbot.aimAtHead();
+		// m_aimbot.aimAtHead();
+		m_esp.drawCircle();
 	}
 }
 
 void Hack::initializePlayerList() noexcept
 {
-	m_playerList.clear();
-
 	const int playerCount { Memory::read<int>(m_process.getAddress() + Offsets::g_playerCount) };
 	std::uintptr_t addressPlayerList { Memory::read<std::uintptr_t>
 		(m_process.getAddress() + Offsets::g_playerList) };

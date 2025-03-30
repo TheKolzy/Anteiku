@@ -2,6 +2,7 @@
 #define HACK_H
 
 #include "Aimbot.h"
+#include "ESP.h"
 #include "Memory.h"
 #include "Offsets.h"
 #include "Player.h"
@@ -17,7 +18,7 @@ class Hack
 public:
 	explicit Hack(std::wstring_view processName);
 
-	void run() const noexcept;
+	void run() noexcept;
 
 private:
 	void initializePlayerList() noexcept;
@@ -28,6 +29,7 @@ private:
 	const Player        m_player;
 	std::vector<Player> m_playerList {};
 	const Aimbot        m_aimbot;
+	ESP                 m_esp;
 };
 
 #endif
