@@ -8,6 +8,7 @@
 #include <imgui_impl_dx11.h>
 #include <imgui_impl_win32.h>
 
+#include <print>
 #include <stdexcept>
 
 #include <Windows.h>
@@ -21,9 +22,14 @@ public:
 	ESP();
 	~ESP() noexcept { cleanupImGui(); }
 
-	void drawCircle() noexcept; // Not Const
+	void run() noexcept; // Not Const
 
 private:
+	void showMenu()            noexcept;
+	void mainMenu()            noexcept;
+
+	bool m_showMenu {};
+
 	static LRESULT WINAPI windowProcedure(HWND window, UINT message, WPARAM wordParameter
 		, LPARAM longParameter)             noexcept;
 
@@ -32,7 +38,7 @@ private:
 	[[nodiscard]] bool initializeRenderTarget() noexcept;
 	[[nodiscard]] bool initializeImGui()        noexcept;
 
-	void startFrame()    const noexcept;
+	void startFrame()          noexcept;
 	void endFrame()            noexcept;
 
 	void cleanupDeviceD3D()    noexcept;

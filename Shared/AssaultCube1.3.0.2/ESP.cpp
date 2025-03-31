@@ -13,16 +13,45 @@ ESP::ESP()
 	}
 
 	if (!initializeImGui())
+	{
+		cleanupImGui();
 		throw std::runtime_error("ImGui could not be initialized.");
+	}
 }
 
-void ESP::drawCircle() noexcept // Not Const
+void ESP::run() noexcept // Not Const
 {
 	startFrame();
 
-	ImGui::GetBackgroundDrawList()->AddCircleFilled({ 500, 500 }, 250.f, ImColor(1.f, 0.f, 0.f));
+	mainMenu();
 
 	endFrame();
+}
+
+void ESP::showMenu() noexcept
+{
+	m_showMenu = !m_showMenu;
+	LONG style { GetWindowLong(m_window, GWL_EXSTYLE) };
+	if (m_showMenu)
+		style &= ~WS_EX_TRANSPARENT;
+	else
+		style |=  WS_EX_TRANSPARENT;
+
+	SetWindowLongW(m_window, GWL_EXSTYLE, style);
+	SetLayeredWindowAttributes(m_window, RGB(0, 0, 0), BYTE(255), LWA_ALPHA | LWA_COLORKEY);
+}
+
+void ESP::mainMenu() noexcept
+{
+	if (m_showMenu)
+	{
+		ImGui::Begin("Anteiku", &m_showMenu);
+
+		if (ImGui::Button("Press me"))
+			std::println("You pressed me.");
+
+		ImGui::End();
+	}
 }
 
 extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND window, UINT message
@@ -45,31 +74,21 @@ LRESULT WINAPI ESP::windowProcedure(HWND window, UINT message, WPARAM wordParame
 
 bool ESP::initializeWindow() noexcept
 {
-	m_windowClass = { .cbSize { sizeof(WNDCLASSEXW) }, .style { CS_HREDRAW | CS_VREDRAW }
-		, .lpfnWndProc { windowProcedure }, .hInstance { GetModuleHandle(nullptr) }
-		, .lpszClassName { L"ESP Window Class" } };
+	m_windowClass = { .cbSize { sizeof(WNDCLASSEXW) }, .lpfnWndProc { windowProcedure }
+		, .hInstance { GetModuleHandle(nullptr) }, .lpszClassName { L"ESP Window Class" } };
 	if (!RegisterClassExW(&m_windowClass))
 		return false;
 
-	m_window = { CreateWindowExW(WS_EX_TOPMOST | WS_EX_TRANSPARENT | WS_EX_LAYERED
-		, m_windowClass.lpszClassName, L"ESP Window", WS_POPUP, 0, 0, 1920, 1080, nullptr
-		, nullptr, m_windowClass.hInstance, nullptr) };
+	m_window = { CreateWindowExW(WS_EX_LAYERED | WS_EX_TOOLWINDOW | WS_EX_TOPMOST
+		| WS_EX_TRANSPARENT, m_windowClass.lpszClassName, L"ESP Window", WS_POPUP, 0, 0
+		, GetSystemMetrics(SM_CXSCREEN), GetSystemMetrics(SM_CYSCREEN), nullptr, nullptr
+		, m_windowClass.hInstance, nullptr) };
 	if (!m_window)
 		return false;
 
-	if (!SetLayeredWindowAttributes(m_window, RGB(0, 0, 0), BYTE(255), LWA_ALPHA))
-		return false;
-
-	RECT  clientArea {};
-	GetClientRect(m_window, &clientArea);
-	RECT  windowArea {};
-	GetWindowRect(m_window, &windowArea);
-	POINT difference {};
-	ClientToScreen(m_window, &difference);
-	const MARGINS margins { windowArea.left + (difference.x - windowArea.left)
-		, windowArea.top + (difference.y - windowArea.top), clientArea.right, clientArea.bottom };
-	if (FAILED(DwmExtendFrameIntoClientArea(m_window, &margins)))
-		return false;
+	SetLayeredWindowAttributes(m_window, RGB(0, 0, 0), BYTE(255), LWA_ALPHA | LWA_COLORKEY);
+	// Register Keyboard Key for the Menu
+	RegisterHotKey(nullptr, 1, MOD_NOREPEAT, VK_DELETE);
 
 	return true;
 }
@@ -77,8 +96,8 @@ bool ESP::initializeWindow() noexcept
 bool ESP::initializeDeviceD3D() noexcept
 {
 	DXGI_SWAP_CHAIN_DESC swapChainDescription {};
-	swapChainDescription.BufferDesc.Width                   = 1920;
-	swapChainDescription.BufferDesc.Height                  = 1080;
+	swapChainDescription.BufferDesc.Width                   = static_cast<UINT>(GetSystemMetrics(SM_CXSCREEN));
+	swapChainDescription.BufferDesc.Height                  = static_cast<UINT>(GetSystemMetrics(SM_CYSCREEN));
 	swapChainDescription.BufferDesc.RefreshRate.Numerator   = 60U;
 	swapChainDescription.BufferDesc.RefreshRate.Denominator = 1U;
 	swapChainDescription.BufferDesc.Format                  = DXGI_FORMAT_R8G8B8A8_UNORM;
@@ -141,11 +160,17 @@ bool ESP::initializeImGui() noexcept
 	return true;
 }
 
-void ESP::startFrame() const noexcept
+void ESP::startFrame() noexcept
 {
 	MSG message {};
 	while (PeekMessage(&message, nullptr, 0U, 0U, PM_REMOVE))
 	{
+		// Checks if any Registered Key has been Pressed
+		if (message.message == WM_HOTKEY)
+		{
+			if (message.wParam == 1)
+				showMenu();
+		}
 		TranslateMessage(&message);
 		DispatchMessage(&message);
 	}
@@ -182,6 +207,8 @@ void ESP::cleanupRenderTarget() noexcept
 
 void ESP::cleanupImGui() noexcept
 {
+	UnregisterHotKey(nullptr, 1);
+
 	ImGui_ImplDX11_Shutdown();
 	ImGui_ImplWin32_Shutdown();
 	ImGui::DestroyContext();
