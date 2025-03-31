@@ -17,6 +17,7 @@ class Player
 {
 public:
 	explicit Player (std::uintptr_t address)           noexcept;
+	~Player() noexcept = default;
 
 	[[nodiscard]]    Vector3<float> getHead()    const noexcept;
 	[[nodiscard]]    Vector3<float> getBody()    const noexcept;

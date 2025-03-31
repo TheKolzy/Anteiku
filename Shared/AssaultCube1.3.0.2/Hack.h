@@ -17,17 +17,19 @@ class Hack
 {
 public:
 	explicit Hack(std::wstring_view processName);
+	~Hack() noexcept = default;
 
 	void run() noexcept;
 
 private:
 	void initializePlayerList() noexcept;
 
+	std::vector<Player> m_playerList {};
+
 	const Process       m_process;
 	const Memory        m_memory;
 
 	const Player        m_player;
-	std::vector<Player> m_playerList {};
 	const Aimbot        m_aimbot;
 	ESP                 m_esp;
 };

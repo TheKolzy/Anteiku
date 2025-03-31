@@ -8,8 +8,9 @@ template <std::floating_point T>
 class Vector3
 {
 public:
-	constexpr Vector3() noexcept = default;
 	constexpr Vector3(T x, T y, T z) noexcept : m_x { x }, m_y { y }, m_z { z } {};
+	constexpr Vector3() noexcept = default;
+	~Vector3() noexcept = default;
 
 	[[nodiscard]] constexpr Vector3 operator+(const Vector3& vector) const noexcept;
 	[[nodiscard]] constexpr Vector3 operator-(const Vector3& vector) const noexcept;

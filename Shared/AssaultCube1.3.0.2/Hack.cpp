@@ -17,7 +17,6 @@ void Hack::run() noexcept
 {
 	while (true)
 	{
-		// m_aimbot.aimAtHead();
 		m_esp.drawCircle();
 	}
 }
