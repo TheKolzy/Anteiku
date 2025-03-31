@@ -19,19 +19,20 @@ class ESP
 {
 public:
 	ESP();
+	~ESP() noexcept { cleanupImGui(); }
 
-	void drawCircle() noexcept;
+	void drawCircle() noexcept; // Not Const
 
 private:
 	static LRESULT WINAPI windowProcedure(HWND window, UINT message, WPARAM wordParameter
-		, LPARAM longParameter);
+		, LPARAM longParameter)             noexcept;
 
-	[[nodiscard]] bool initializeWindow();
-	[[nodiscard]] bool initializeDeviceD3D();
-	[[nodiscard]] bool initializeRenderTarget();
-	[[nodiscard]] bool initializeImGui();
+	[[nodiscard]] bool initializeWindow()       noexcept;
+	[[nodiscard]] bool initializeDeviceD3D()    noexcept;
+	[[nodiscard]] bool initializeRenderTarget() noexcept;
+	[[nodiscard]] bool initializeImGui()        noexcept;
 
-	void startFrame()          noexcept;
+	void startFrame()    const noexcept;
 	void endFrame()            noexcept;
 
 	void cleanupDeviceD3D()    noexcept;

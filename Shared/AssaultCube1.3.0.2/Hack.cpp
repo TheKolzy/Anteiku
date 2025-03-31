@@ -13,7 +13,7 @@ catch (const std::exception& exception) {
     std::exit(EXIT_FAILURE);
 }
 
-void Hack::run() noexcept
+void Hack::run() noexcept // Not Const
 {
 	while (true)
 	{

@@ -16,7 +16,7 @@ ESP::ESP()
 		throw std::runtime_error("ImGui could not be initialized.");
 }
 
-void ESP::drawCircle() noexcept
+void ESP::drawCircle() noexcept // Not Const
 {
 	startFrame();
 
@@ -29,7 +29,7 @@ extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND window, UINT m
 	, WPARAM wordParameter, LPARAM longParameter);
 
 LRESULT WINAPI ESP::windowProcedure(HWND window, UINT message, WPARAM wordParameter
-	, LPARAM longParameter)
+	, LPARAM longParameter) noexcept
 {
 	if (ImGui_ImplWin32_WndProcHandler(window, message, wordParameter, longParameter))
 		return 0L;
@@ -43,7 +43,7 @@ LRESULT WINAPI ESP::windowProcedure(HWND window, UINT message, WPARAM wordParame
 	return DefWindowProcW(window, message, wordParameter, longParameter);
 }
 
-bool ESP::initializeWindow()
+bool ESP::initializeWindow() noexcept
 {
 	m_windowClass = { .cbSize { sizeof(WNDCLASSEXW) }, .style { CS_HREDRAW | CS_VREDRAW }
 		, .lpfnWndProc { windowProcedure }, .hInstance { GetModuleHandle(nullptr) }
@@ -74,15 +74,18 @@ bool ESP::initializeWindow()
 	return true;
 }
 
-bool ESP::initializeDeviceD3D()
+bool ESP::initializeDeviceD3D() noexcept
 {
 	DXGI_SWAP_CHAIN_DESC swapChainDescription {};
+	swapChainDescription.BufferDesc.Width                   = 1920;
+	swapChainDescription.BufferDesc.Height                  = 1080;
 	swapChainDescription.BufferDesc.RefreshRate.Numerator   = 60U;
 	swapChainDescription.BufferDesc.RefreshRate.Denominator = 1U;
 	swapChainDescription.BufferDesc.Format                  = DXGI_FORMAT_R8G8B8A8_UNORM;
 	swapChainDescription.SampleDesc.Count                   = 1U;
+	swapChainDescription.SampleDesc.Quality                 = 0U;
 	swapChainDescription.BufferUsage                        = DXGI_USAGE_RENDER_TARGET_OUTPUT;
-	swapChainDescription.BufferCount                        = 2U;
+	swapChainDescription.BufferCount                        = 1U;
 	swapChainDescription.OutputWindow                       = m_window;
 	swapChainDescription.Windowed                           = TRUE;
 	swapChainDescription.SwapEffect                         = DXGI_SWAP_EFFECT_DISCARD;
@@ -99,10 +102,9 @@ bool ESP::initializeDeviceD3D()
 	return initializeRenderTarget();
 }
 
-bool ESP::initializeRenderTarget()
+bool ESP::initializeRenderTarget() noexcept
 {
 	ID3D11Texture2D* backBuffer {};
-
 	const HRESULT bufferResult { m_swapChain->GetBuffer(0U, IID_PPV_ARGS(&backBuffer)) };
 	if (FAILED(bufferResult))
 		return false;
@@ -117,7 +119,7 @@ bool ESP::initializeRenderTarget()
 	return true;
 }
 
-bool ESP::initializeImGui()
+bool ESP::initializeImGui() noexcept
 {
 	if (m_window)
 	{
@@ -139,7 +141,7 @@ bool ESP::initializeImGui()
 	return true;
 }
 
-void ESP::startFrame() noexcept
+void ESP::startFrame() const noexcept
 {
 	MSG message {};
 	while (PeekMessage(&message, nullptr, 0U, 0U, PM_REMOVE))
@@ -158,7 +160,6 @@ void ESP::endFrame() noexcept
 	ImGui::Render();
 	constexpr float alphaColor[4] {};
 	m_deviceContext->OMSetRenderTargets(1U, &m_renderTargetView, nullptr);
-
 	if (m_renderTargetView)
 		m_deviceContext->ClearRenderTargetView(m_renderTargetView, alphaColor);
 
