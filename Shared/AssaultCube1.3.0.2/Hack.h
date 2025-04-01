@@ -13,7 +13,7 @@
 #include <string_view>
 #include <vector>
 
-class Hack
+class Hack // Not Const
 {
 public:
 	explicit Hack(std::wstring_view processName);
@@ -25,6 +25,8 @@ private:
 	void initializePlayerList() noexcept;
 
 	std::vector<Player> m_playerList {};
+
+	// --- //
 
 	const Process       m_process;
 	const Memory        m_memory;

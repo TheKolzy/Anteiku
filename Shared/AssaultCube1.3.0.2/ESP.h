@@ -16,19 +16,21 @@
 #include <d3d11.h>
 #include <dwmapi.h>
 
-class ESP
+class ESP // Not Const
 {
 public:
-	ESP();
-	~ESP() noexcept { cleanupImGui(); }
+	ESP ();
+	~ESP()          noexcept { cleanupImGui(); }
 
-	void run() noexcept; // Not Const
+	void run()      noexcept; // Not Const
 
 private:
-	void showMenu()            noexcept;
-	void mainMenu()            noexcept;
+	void showMenu() noexcept;
+	void mainMenu() noexcept;
 
 	bool m_showMenu {};
+
+	// --- //
 
 	static LRESULT WINAPI windowProcedure(HWND window, UINT message, WPARAM wordParameter
 		, LPARAM longParameter)             noexcept;
