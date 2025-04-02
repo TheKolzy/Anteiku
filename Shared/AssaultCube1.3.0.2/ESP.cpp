@@ -29,7 +29,7 @@ void ESP::run() noexcept // Not Const
 	endFrame();
 }
 
-void ESP::showMenu() noexcept
+void ESP::showMenu() noexcept // Not Const
 {
 	m_showMenu = !m_showMenu;
 	LONG style { GetWindowLong(m_window, GWL_EXSTYLE) };
@@ -42,7 +42,7 @@ void ESP::showMenu() noexcept
 	SetLayeredWindowAttributes(m_window, RGB(0, 0, 0), BYTE(255), LWA_ALPHA | LWA_COLORKEY);
 }
 
-void ESP::mainMenu() noexcept
+void ESP::mainMenu() noexcept // Not Const
 {
 	if (m_showMenu)
 	{
@@ -70,8 +70,8 @@ void ESP::renderESP() const noexcept
 	if (m_viewMatrix.worldToScreen(headPosition, top)
 		&& m_viewMatrix.worldToScreen(feetPosition, bottom))
 	{
-		const float height = bottom.getY() - top.getY();
-		const float width  = height * 0.35f;
+		const float height { bottom.getY() - top.getY() };
+		const float width  { height * 0.35f };
 		ImGui::GetBackgroundDrawList()->AddRect({ top.getX() - width, top.getY() }
 			, { top.getX() + width, bottom.getY() }, ImColor(255, 255, 255) );
 	}
