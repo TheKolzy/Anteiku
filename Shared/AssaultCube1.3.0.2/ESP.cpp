@@ -53,27 +53,31 @@ void ESP::mainMenu() noexcept // Not Const
 
 		if (ImGui::Button("ESP"))
 			m_activateESP = !m_activateESP;	
-		if (m_activateESP)
-			renderESP();
 
 		ImGui::End();
 	}
+
+	if (m_activateESP)
+		renderESP();
 }
 
 void ESP::renderESP() const noexcept
 {
-	const Vector3<float> headPosition { m_playerList[0].getHead() };
-	const Vector3<float> feetPosition { m_playerList[0].getBody() };
-
-	Vector3<float> top    {};
-	Vector3<float> bottom {};
-	if (m_viewMatrix.worldToScreen(headPosition, top)
-		&& m_viewMatrix.worldToScreen(feetPosition, bottom))
+	if (m_playerList[0].isAlive())
 	{
-		const float height { bottom.getY() - top.getY() };
-		const float width  { height * 0.35f };
-		ImGui::GetBackgroundDrawList()->AddRect({ top.getX() - width, top.getY() }
-			, { top.getX() + width, bottom.getY() }, ImColor(255, 255, 255) );
+		const Vector3<float> headPosition { m_playerList[0].getHead() };
+		const Vector3<float> feetPosition { m_playerList[0].getBody() };
+
+		Vector3<float> top    {};
+		Vector3<float> bottom {};
+		if (m_viewMatrix.worldToScreen(headPosition, top)
+			&& m_viewMatrix.worldToScreen(feetPosition, bottom))
+		{
+			const float height { bottom.getY() - top.getY() };
+			const float width  { height * 0.35f };
+			ImGui::GetBackgroundDrawList()->AddRect({ top.getX() - width, top.getY() }
+				, { top.getX() + width, bottom.getY() }, ImColor(255, 255, 255) );
+		}
 	}
 }
 
