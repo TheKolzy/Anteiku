@@ -1,6 +1,7 @@
 #include "ESP.h"
 
-ESP::ESP()
+ESP::ESP(const ViewMatrix& viewMatrix, const std::vector<Player>& playerList)
+	: m_viewMatrix { viewMatrix }, m_playerList { playerList }
 {
 	if (!initializeWindow())
 		throw std::runtime_error("The overlay could not be initialized.");
@@ -50,7 +51,29 @@ void ESP::mainMenu() noexcept
 		if (ImGui::Button("Press me"))
 			std::println("You pressed me.");
 
+		if (ImGui::Button("ESP"))
+			m_activateESP = !m_activateESP;	
+		if (m_activateESP)
+			renderESP();
+
 		ImGui::End();
+	}
+}
+
+void ESP::renderESP() const noexcept
+{
+	const Vector3<float> headPosition { m_playerList[0].getHead() };
+	const Vector3<float> feetPosition { m_playerList[0].getBody() };
+
+	Vector3<float> top    {};
+	Vector3<float> bottom {};
+	if (m_viewMatrix.worldToScreen(headPosition, top)
+		&& m_viewMatrix.worldToScreen(feetPosition, bottom))
+	{
+		const float height = bottom.getY() - top.getY();
+		const float width  = height * 0.35f;
+		ImGui::GetBackgroundDrawList()->AddRect({ top.getX() - width, top.getY() }
+			, { top.getX() + width, bottom.getY() }, ImColor(255, 255, 255) );
 	}
 }
 
@@ -81,7 +104,7 @@ bool ESP::initializeWindow() noexcept
 
 	m_window = { CreateWindowExW(WS_EX_LAYERED | WS_EX_TOOLWINDOW | WS_EX_TOPMOST
 		| WS_EX_TRANSPARENT, m_windowClass.lpszClassName, L"ESP Window", WS_POPUP, 0, 0
-		, GetSystemMetrics(SM_CXSCREEN), GetSystemMetrics(SM_CYSCREEN), nullptr, nullptr
+		, 816, 639, nullptr, nullptr
 		, m_windowClass.hInstance, nullptr) };
 	if (!m_window)
 		return false;
@@ -96,8 +119,6 @@ bool ESP::initializeWindow() noexcept
 bool ESP::initializeDeviceD3D() noexcept
 {
 	DXGI_SWAP_CHAIN_DESC swapChainDescription {};
-	swapChainDescription.BufferDesc.Width                   = static_cast<UINT>(GetSystemMetrics(SM_CXSCREEN));
-	swapChainDescription.BufferDesc.Height                  = static_cast<UINT>(GetSystemMetrics(SM_CYSCREEN));
 	swapChainDescription.BufferDesc.RefreshRate.Numerator   = 60U;
 	swapChainDescription.BufferDesc.RefreshRate.Denominator = 1U;
 	swapChainDescription.BufferDesc.Format                  = DXGI_FORMAT_R8G8B8A8_UNORM;

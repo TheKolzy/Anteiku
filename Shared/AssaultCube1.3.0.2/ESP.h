@@ -4,12 +4,17 @@
 #define NOCOMM
 #define WIN32_LEAN_AND_MEAN
 
+#include "Player.h"
+#include "Vector3.h"
+#include "ViewMatrix.h"
+
 #include <imgui.h>
 #include <imgui_impl_dx11.h>
 #include <imgui_impl_win32.h>
 
 #include <print>
 #include <stdexcept>
+#include <vector>
 
 #include <Windows.h>
 
@@ -19,16 +24,22 @@
 class ESP // Not Const
 {
 public:
-	ESP ();
-	~ESP()          noexcept { cleanupImGui(); }
+	ESP (const ViewMatrix& viewMatrix, const std::vector<Player>& playerList);
+	~ESP()                 noexcept { cleanupImGui(); }
 
-	void run()      noexcept; // Not Const
+	void run()             noexcept; // Not Const
 
 private:
-	void showMenu() noexcept;
-	void mainMenu() noexcept;
+	void showMenu()        noexcept; // Not Const
+	void mainMenu()        noexcept; // Not Const
 
-	bool m_showMenu {};
+	void renderESP() const noexcept;
+
+	bool                       m_showMenu    {};
+	bool                       m_activateESP {};
+
+	const ViewMatrix&          m_viewMatrix;
+	const std::vector<Player>& m_playerList;
 
 	// --- //
 

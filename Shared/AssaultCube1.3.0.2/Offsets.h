@@ -21,6 +21,7 @@ namespace Offsets
 
 	inline constexpr std::ptrdiff_t g_playerList  { 0x18AC04 };
 	inline constexpr std::ptrdiff_t g_playerCount { 0x18AC0C };
+	inline constexpr std::ptrdiff_t g_viewMatrix  { 0x17DFD0 };
 }
 
 #endif

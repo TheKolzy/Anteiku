@@ -7,6 +7,7 @@
 #include "Offsets.h"
 #include "Player.h"
 #include "Process.h"
+#include "ViewMatrix.h"
 
 #include <cstdint>
 #include <print>
@@ -33,6 +34,7 @@ private:
 
 	const Player        m_player;
 	const Aimbot        m_aimbot;
+	const ViewMatrix    m_viewMatrix;
 	ESP                 m_esp;
 };
 
