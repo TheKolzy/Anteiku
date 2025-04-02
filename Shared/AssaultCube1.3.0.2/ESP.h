@@ -51,12 +51,12 @@ private:
 	[[nodiscard]] bool initializeRenderTarget() noexcept;
 	[[nodiscard]] bool initializeImGui()        noexcept;
 
-	void startFrame()          noexcept;
-	void endFrame()            noexcept;
+	void startFrame()                           noexcept;
+	void endFrame()                             noexcept;
 
-	void cleanupDeviceD3D()    noexcept;
-	void cleanupRenderTarget() noexcept;
-	void cleanupImGui()        noexcept;
+	void cleanupDeviceD3D()                     noexcept;
+	void cleanupRenderTarget()                  noexcept;
+	void cleanupImGui()                         noexcept;
 
 	WNDCLASSEXW             m_windowClass      {};
 	HWND                    m_window           {};

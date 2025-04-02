@@ -18,9 +18,9 @@ class Hack // Not Const
 {
 public:
 	explicit Hack(std::wstring_view processName);
-	~Hack() noexcept = default;
+	~Hack()                     noexcept = default;
 
-	void run() noexcept; // Not Const
+	void run()                  noexcept; // Not Const
 
 private:
 	void initializePlayerList() noexcept;

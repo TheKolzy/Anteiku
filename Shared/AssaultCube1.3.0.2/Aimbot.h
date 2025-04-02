@@ -12,9 +12,9 @@ class Aimbot
 {
 public:
 	Aimbot(const Player& player, const std::vector<Player>& playerList) noexcept;
-	~Aimbot() noexcept = default;
+	~Aimbot()                                                           noexcept = default;
 
-	void aimAtHead() const noexcept;
+	void aimAtHead()                                              const noexcept;
 
 private:
 	const Player&              m_player;
