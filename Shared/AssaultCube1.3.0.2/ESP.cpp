@@ -108,8 +108,7 @@ bool ESP::initializeWindow() noexcept
 
 	m_window = { CreateWindowExW(WS_EX_LAYERED | WS_EX_TOOLWINDOW | WS_EX_TOPMOST
 		| WS_EX_TRANSPARENT, m_windowClass.lpszClassName, L"ESP Window", WS_POPUP, 0, 0
-		, 816, 639, nullptr, nullptr
-		, m_windowClass.hInstance, nullptr) };
+		, 800, 600, nullptr, nullptr, m_windowClass.hInstance, nullptr) };
 	if (!m_window)
 		return false;
 

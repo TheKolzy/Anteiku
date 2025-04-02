@@ -17,15 +17,15 @@ public:
 	[[nodiscard]] constexpr Vector3 operator*(const Vector3& vector) const noexcept;
 	[[nodiscard]] constexpr Vector3 operator/(const Vector3& vector) const noexcept;
 
-	[[nodiscard]] constexpr T getX() const noexcept { return m_x; }
-	[[nodiscard]] constexpr T getY() const noexcept { return m_y; }
-	[[nodiscard]] constexpr T getZ() const noexcept { return m_z; }
+	[[nodiscard]] constexpr T getX() const noexcept { return m_x;  }
+	[[nodiscard]] constexpr T getY() const noexcept { return m_y;  }
+	[[nodiscard]] constexpr T getZ() const noexcept { return m_z;  }
 
-	constexpr void setX(T value) noexcept { m_x = value; }
-	constexpr void setY(T value) noexcept { m_y = value; }
-	constexpr void setZ(T value) noexcept { m_z = value; }
+	constexpr void setX(T value)           noexcept { m_x = value; }
+	constexpr void setY(T value)           noexcept { m_y = value; }
+	constexpr void setZ(T value)           noexcept { m_z = value; }
 
-	void print()           const noexcept { std::println("{} {} {}", m_x, m_y, m_z); }
+	void print()                     const noexcept { std::println("{} {} {}", m_x, m_y, m_z); }
 
 private:
 	T m_x {};

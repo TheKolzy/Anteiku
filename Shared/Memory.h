@@ -14,7 +14,7 @@ class Memory
 {
 public:
 	explicit Memory(std::uint32_t processIdentifier);
-	~Memory() noexcept { CloseHandle(s_process); }
+	~Memory()                                               noexcept { CloseHandle(s_process); }
 
 	template <typename T>
 	[[nodiscard]] static T read(std::uintptr_t address)     noexcept;

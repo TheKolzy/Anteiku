@@ -17,7 +17,7 @@ class Process
 {
 public:
 	explicit Process(std::wstring_view name);
-	~Process() noexcept = default;
+	~Process()                                               noexcept = default;
 
 	[[nodiscard]] std::wstring_view getName()          const noexcept { return m_name;       }
 	[[nodiscard]] std::uint32_t     getIdentifier()    const noexcept { return m_identifier; }
@@ -27,7 +27,7 @@ protected:
 	Process(const Process& process)            = delete;
 	Process& operator=(const Process& process) = delete;
 
-	Process(Process&& process)                 = delete;	
+	Process(Process&& process)                 = delete;
 	Process& operator=(Process&& process)      = delete;
 
 private:
