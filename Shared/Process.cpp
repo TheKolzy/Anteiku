@@ -44,7 +44,7 @@ bool Process::initializeNameAndIdentifier(std::wstring_view name) noexcept
 		}
 	}
 	while (Process32Next(processSnapshot, &processEntry));
-	std::println("[Warning]: Check the process name.");
+	std::println("[Warning]: Check the process name or if it's running.");
 
 	CloseHandle(processSnapshot);
 	return false;

@@ -1,5 +1,8 @@
 #include "Process.h"
 
+#include <print>
+#include <stdexcept>
+
 int main()
 {
 	try
