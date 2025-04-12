@@ -2,6 +2,7 @@
 
 #define WIN32_LEAN_AND_MEAN
 
+#include <cstdint>
 #include <print>
 #include <stdexcept>
 
