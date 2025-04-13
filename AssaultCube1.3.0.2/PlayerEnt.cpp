@@ -2,8 +2,10 @@
 #include "Offsets.h"
 #include "PlayerEnt.h"
 
-PlayerEnt::PlayerEnt(std::uintptr_t address) noexcept
-	: m_baseAddress { address }
+#include <cstdint>
+
+PlayerEnt::PlayerEnt(std::uintptr_t baseAddress) noexcept
+	: m_baseAddress { baseAddress }
 {
 }
 

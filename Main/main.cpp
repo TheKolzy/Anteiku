@@ -3,6 +3,7 @@
 #include "PlayerEnt.h"
 #include "Process.h"
 
+#include <cstdint>
 #include <print>
 #include <stdexcept>
 
