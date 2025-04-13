@@ -21,7 +21,7 @@ public:
 
 	template <std::size_t N>
 	[[nodiscard]] static std::uintptr_t resolveAddress(std::uintptr_t address
-		, const std::array<std::ptrdiff_t, N>& offsets)                  noexcept;
+		, const std::array<std::ptrdiff_t, N>& offsets) noexcept;
 
 private:
 	static inline HANDLE s_process {};
