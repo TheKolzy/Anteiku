@@ -113,5 +113,10 @@ bool PlayerEnt::isDead() const noexcept
 
 std::uint8_t PlayerEnt::getAmmo() const noexcept
 {
-	return Memory::read<std::uint8_t>(Memory::resolveAddress<3>(m_baseAddress, Offsets::g_ammo));
+	return Memory::read<std::uint8_t>(Memory::resolveAddress(m_baseAddress, Offsets::g_ammo));
+}
+
+void PlayerEnt::setAmmo(std::uint8_t buffer) const noexcept
+{
+	Memory::write(Memory::resolveAddress(m_baseAddress, Offsets::g_ammo), buffer);
 }

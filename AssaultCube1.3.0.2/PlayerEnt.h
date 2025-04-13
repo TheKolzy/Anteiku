@@ -15,7 +15,7 @@ public:
 	[[nodiscard]] Vector3<float> getBody    ()                             const noexcept;
 	              void           setBody    (const Vector3<float>& buffer) const noexcept;
 	[[nodiscard]] Vector3<float> getView    ()                             const noexcept;
-				  void           setView    (const Vector3<float>& buffer) const noexcept;
+                      void           setView    (const Vector3<float>& buffer) const noexcept;
 	[[nodiscard]] std::int8_t    getHealth  ()                             const noexcept;
 	              void           setHealth  (std::int8_t buffer)           const noexcept;
 	[[nodiscard]] std::uint8_t   getArmor   ()                             const noexcept;
@@ -28,6 +28,7 @@ public:
 	              void           setTeam    (std::uint8_t buffer)          const noexcept;
 	[[nodiscard]] bool           isDead     ()                             const noexcept;
 	[[nodiscard]] std::uint8_t   getAmmo    ()                             const noexcept;
+	              void           setAmmo    (std::uint8_t)                 const noexcept;
 
 private:
 	const std::uintptr_t m_baseAddress {};

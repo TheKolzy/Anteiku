@@ -16,5 +16,5 @@ namespace Offsets
 	inline constexpr std::ptrdiff_t g_name                { 0x205 };
 	inline constexpr std::ptrdiff_t g_team                { 0x30C };
 	inline constexpr std::ptrdiff_t g_isDead              { 0x318 };
-	inline constexpr std::array<std::ptrdiff_t, 3> g_ammo { 0x364, 0x14, 0x0 };
+	inline constexpr std::array<std::ptrdiff_t, 3> g_ammo { 0x364, 0x014, 0x000 };
 }
