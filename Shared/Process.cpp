@@ -1,6 +1,7 @@
 #include "Process.h"
 
 #define WIN32_LEAN_AND_MEAN
+#define NOMINMAX
 
 #include <cstdint>
 #include <print>
