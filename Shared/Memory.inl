@@ -26,3 +26,13 @@ bool Memory::write(std::uintptr_t address, const T& buffer) noexcept
 
 	return true;
 }
+
+template <std::size_t N>
+std::uintptr_t Memory::resolveAddress(std::uintptr_t address
+	, const std::array<std::ptrdiff_t, N>& offsets) noexcept
+{
+	for (std::size_t i {}; i < offsets.size() - 1; ++i)
+		address = read<std::uintptr_t>(address + offsets[i]);
+
+	return address;
+}
