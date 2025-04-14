@@ -5,15 +5,20 @@
 #include "Process.h"
 
 #include <string_view>
+#include <vector>
 
 class Hack
 {
 public:
 	explicit Hack(std::wstring_view processName) noexcept;
+	void run()                             const noexcept;
 
 private:
 	const Process m_process;
 	const Memory  m_memory;
 
-	PlayerEnt     m_playerEnt {};
+	void initializeBotEnt() noexcept;
+
+	PlayerEnt              m_playerEnt {};
+	std::vector<PlayerEnt> m_botEnt    {};
 };
