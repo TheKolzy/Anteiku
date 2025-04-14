@@ -8,6 +8,7 @@
 #include <print>
 #include <stdexcept>
 #include <string_view>
+#include <vector>
 
 Hack::Hack(std::wstring_view processName) noexcept
 try
