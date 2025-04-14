@@ -8,7 +8,7 @@ class Vector3
 {
 public:
 	constexpr Vector3(T x, T y, T z) noexcept : m_x { x }, m_y { y }, m_z { z } {};
-	constexpr Vector3() noexcept = default;
+	constexpr Vector3()              noexcept = default;
 
 	[[nodiscard]] constexpr Vector3<T> operator+(const Vector3<T>& vector3) const noexcept;
 	[[nodiscard]] constexpr Vector3<T> operator-(const Vector3<T>& vector3) const noexcept;
