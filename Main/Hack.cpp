@@ -12,8 +12,9 @@
 Hack::Hack(std::wstring_view processName) noexcept
 try
 	: m_process { processName }, m_memory { m_process.getIdentifier() }
-	, m_playerEnt { Memory::read<std::uintptr_t>(m_process.getBaseAddress() + Offsets::g_playerEnt) }
 {
+	m_playerEnt = PlayerEnt { Memory::read<std::uintptr_t>
+		(m_process.getBaseAddress() + Offsets::g_playerEnt) };
 }
 catch (const std::runtime_error& error)
 {

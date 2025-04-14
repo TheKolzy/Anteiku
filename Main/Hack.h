@@ -12,7 +12,8 @@ public:
 	explicit Hack(std::wstring_view processName) noexcept;
 
 private:
-	const Process   m_process;
-	const Memory    m_memory;
-	const PlayerEnt m_playerEnt;
+	const Process m_process;
+	const Memory  m_memory;
+
+	PlayerEnt     m_playerEnt {};
 };
