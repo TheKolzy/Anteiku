@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Aimbot.h"
 #include "Memory.h"
 #include "PlayerEnt.h"
 #include "Process.h"
@@ -11,7 +12,7 @@ class Hack
 {
 public:
 	explicit Hack(std::wstring_view processName) noexcept;
-	void run()                             const noexcept;
+	void run() const noexcept;
 
 private:
 	const Process m_process;
@@ -21,4 +22,5 @@ private:
 
 	PlayerEnt              m_playerEnt {};
 	std::vector<PlayerEnt> m_botEnt    {};
+	Aimbot                 m_aimbot    {};
 };

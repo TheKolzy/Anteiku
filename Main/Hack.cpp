@@ -1,3 +1,4 @@
+#include "Aimbot.h"
 #include "Hack.h"
 #include "Memory.h"
 #include "Offsets.h"
@@ -17,6 +18,7 @@ try
 	m_playerEnt = PlayerEnt { Memory::read<std::uintptr_t>
 		(m_process.getBaseAddress() + Offsets::g_playerEnt) };
 	initializeBotEnt();
+	m_aimbot    = Aimbot    { m_playerEnt, m_botEnt };
 }
 catch (const std::runtime_error& error)
 {
@@ -38,6 +40,7 @@ void Hack::initializeBotEnt() noexcept
 	botEntAddress += 0x4;
 	const int botEntCount { Memory::read<int>
 		(m_process.getBaseAddress() + Offsets::g_botEntCount) };
+
 	for (int i {}; i < botEntCount - 1; ++i)
 	{
 		m_botEnt.push_back(PlayerEnt { Memory::read<std::uintptr_t>(botEntAddress) });
