@@ -12,12 +12,12 @@ class Memory
 {
 public:
 	explicit Memory(std::uint32_t processIdentifier);
-	~Memory() noexcept;
+	        ~Memory() noexcept;
 
 	template <typename T>
 	[[nodiscard]] static T    read (std::uintptr_t address)                  noexcept;
 	template <typename T>
-	              static bool write(std::uintptr_t address, const T& buffer) noexcept;
+	              static void write(std::uintptr_t address, const T& buffer) noexcept;
 
 	template <std::size_t N>
 	[[nodiscard]] static std::uintptr_t resolveAddress(std::uintptr_t address

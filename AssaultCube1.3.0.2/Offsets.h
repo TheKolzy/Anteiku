@@ -5,7 +5,7 @@
 
 namespace Offsets
 {
-	inline constexpr std::ptrdiff_t g_playerEnt           { 0x18AC00 };
+	inline constexpr std::ptrdiff_t g_playerEnt { 0x18AC00 };
 
 	inline constexpr std::ptrdiff_t g_head                { 0x004 };
 	inline constexpr std::ptrdiff_t g_body                { 0x028 };

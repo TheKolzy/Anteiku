@@ -1,6 +1,7 @@
+#include "PlayerEnt.h"
+
 #include "Memory.h"
 #include "Offsets.h"
-#include "PlayerEnt.h"
 
 #include <algorithm>
 #include <array>

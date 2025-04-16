@@ -24,16 +24,11 @@ T Memory::read(std::uintptr_t address) noexcept
 }
 
 template <typename T>
-bool Memory::write(std::uintptr_t address, const T& buffer) noexcept
+void Memory::write(std::uintptr_t address, const T& buffer) noexcept
 {
 	if (!WriteProcessMemory(s_process, reinterpret_cast<LPVOID>(address), &buffer
 		, sizeof(T), nullptr))
-	{
 		std::println("[Error]: Memory WriteProcessMemory");
-		return false;
-	}
-
-	return true;
 }
 
 template <std::size_t N>

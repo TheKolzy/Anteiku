@@ -10,7 +10,6 @@ class PlayerEnt
 {
 public:
 	explicit PlayerEnt(std::uintptr_t baseAddress) noexcept;
-	PlayerEnt() noexcept = default;
 
 	[[nodiscard]] Vector3<float> getHead    ()                             const noexcept;
 	[[nodiscard]] Vector3<float> getBody    ()                             const noexcept;
@@ -29,8 +28,8 @@ public:
 	              void           setTeam    (std::uint8_t buffer)          const noexcept;
 	[[nodiscard]] bool           isDead     ()                             const noexcept;
 	[[nodiscard]] std::uint8_t   getAmmo    ()                             const noexcept;
-	              void           setAmmo    (std::uint8_t)                 const noexcept;
+	              void           setAmmo    (std::uint8_t buffer)          const noexcept;
 
 private:
-	std::uintptr_t m_baseAddress {};
+	const std::uintptr_t m_baseAddress {};
 };
