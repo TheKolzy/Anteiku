@@ -43,12 +43,14 @@ void Hack::run() const noexcept
 
 void Hack::initializeBotEnt() noexcept
 {
+	m_botEnt = { std::make_unique<std::vector<PlayerEnt>>() };
+
+	const int botEntCount { Memory::read<int>
+		(m_process->getBaseAddress() + Offsets::g_botEntCount) };
 	std::uintptr_t botEntAddress { Memory::read<std::uintptr_t>
 		(m_process->getBaseAddress() + Offsets::g_botEnt) };
 	botEntAddress += 0x4;
-	const int botEntCount { Memory::read<int>
-		(m_process->getBaseAddress() + Offsets::g_botEntCount) };
-
+	
 	for (int i {}; i < botEntCount - 1; ++i)
 	{
 		m_botEnt->push_back(PlayerEnt { Memory::read<std::uintptr_t>(botEntAddress) });
