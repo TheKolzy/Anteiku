@@ -5,12 +5,13 @@
 #include "Memory.h"
 #include "Process.h"
 
+#include <string_view>
+
 // Modules
 
 #include "Aimbot.h"
 #include "PlayerEnt.h"
 
-#include <string_view>
 #include <vector>
 
 class Hack

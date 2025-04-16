@@ -22,7 +22,7 @@ public:
 	[[nodiscard]] constexpr T    getZ()         const noexcept { return m_z;   }
 	              constexpr void setZ(T buffer)       noexcept { m_z = buffer; }
 
-	void print() const noexcept { std::println("{} {} {}", m_x, m_y, m_z); }
+	void print() const noexcept { std::println("{:.3f} {:.3f} {:.3f}", m_x, m_y, m_z); }
 
 private:
 	T m_x {};
