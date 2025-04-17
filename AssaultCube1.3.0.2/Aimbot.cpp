@@ -31,9 +31,12 @@ void Aimbot::aimAtHead() const noexcept
 	m_playerEnt.setView({ yaw, pitch, 0 });
 }
 
-float Aimbot::getDistance(unsigned int index) const noexcept
+float Aimbot::getDistance() const noexcept
 {
-	const Vector3<float> relativeDistance { m_botEnt[index].getHead() - m_playerEnt.getHead() };
+	if (m_botEnt[0].isDead())
+		return 0.0f;
+
+	const Vector3<float> relativeDistance { m_botEnt[0].getHead() - m_playerEnt.getHead() };
 	const float hypotenuse { std::hypot(
 		  relativeDistance.getX()
 		, relativeDistance.getY()
