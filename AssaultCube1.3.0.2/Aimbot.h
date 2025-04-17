@@ -9,7 +9,8 @@ class Aimbot
 public:
 	Aimbot(const PlayerEnt& playerEnt, const std::vector<PlayerEnt>& botEnt) noexcept;
 
-	void aimAtHead() const noexcept;
+	              void  aimAtHead  ()                   const noexcept;
+	[[nodiscard]] float getDistance(unsigned int index) const noexcept;
 
 private:
 	const PlayerEnt&              m_playerEnt;

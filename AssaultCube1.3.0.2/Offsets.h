@@ -2,6 +2,7 @@
 
 #include <array>
 #include <cstddef>
+#include <numbers>
 
 namespace Offsets
 {
@@ -20,4 +21,6 @@ namespace Offsets
 
 	inline constexpr std::ptrdiff_t g_botEnt      { 0x18AC04 };
 	inline constexpr std::ptrdiff_t g_botEntCount { 0x18AC0C };
+
+	inline constexpr float g_radianToDegree { 180.0f / static_cast<float>(std::numbers::pi) };
 }
